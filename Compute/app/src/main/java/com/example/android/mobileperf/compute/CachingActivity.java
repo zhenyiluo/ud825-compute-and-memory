@@ -25,7 +25,7 @@ import android.widget.Button;
 
 public class CachingActivity extends Activity {
     public static final String LOG_TAG = "CachingActivityExercise";
-
+    private static int[] cache = new int[41];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +60,16 @@ public class CachingActivity extends Activity {
      * @return the nth number of the fibonacci sequence.  Seriously, try to keep up.
      */
     public int computeFibonacci(int positionInFibSequence) {
+        if(cache[positionInFibSequence] != 0){
+            return cache[positionInFibSequence];
+        }
         if (positionInFibSequence <= 2) {
+            cache[positionInFibSequence] = 1;
             return 1;
         } else {
-            return computeFibonacci(positionInFibSequence - 1)
+            cache[positionInFibSequence] = computeFibonacci(positionInFibSequence - 1)
                     + computeFibonacci(positionInFibSequence - 2);
+            return cache[positionInFibSequence];
         }
     }
 }
